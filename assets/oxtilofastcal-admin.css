@@ -1,0 +1,55 @@
+/**
+ * Oxtilofastcal Admin Styles
+ *
+ * @package Oxtilofastcal
+ */
+
+.oxtilofastcal-admin__two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 20px;
+}
+
+@media (max-width: 1100px) {
+    .oxtilofastcal-admin__two-col {
+        grid-template-columns: 1fr;
+    }
+}
+
+.oxtilofastcal-admin__col {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+.oxtilofastcal-admin__col h2 {
+    margin-top: 0;
+    padding-top: 0;
+    border-bottom: 1px solid #dcdcde;
+    padding-bottom: 10px;
+}
+
+.oxtilofastcal-admin__status {
+    margin-left: 10px;
+    font-weight: 600;
+}
+
+.oxtilofastcal-hours input.regular-text {
+    max-width: 140px;
+}
+
+.oxtilofastcal-hours td {
+    vertical-align: middle;
+}
+
+.oxtilofastcal-hours th {
+    text-align: left;
+}
+
+/* Textarea for JSON */
+.oxtilofastcal-admin textarea.code {
+    font-family: Consolas, Monaco, monospace;
+    font-size: 13px;
+}

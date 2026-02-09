@@ -1,0 +1,68 @@
+/**
+ * Oxtilofastcal Gutenberg Block Editor Styles
+ *
+ * @package Oxtilofastcal
+ */
+
+.oxtilofastcal-block-preview {
+    padding: 20px;
+}
+
+.oxtilofastcal-block-preview .components-placeholder {
+    background: linear-gradient(135deg, #f0f4f8 0%, #e8f0f6 100%);
+    border: 2px dashed #0073aa;
+    border-radius: 8px;
+    min-height: 150px;
+}
+
+.oxtilofastcal-block-preview .components-placeholder__label {
+    color: #0073aa;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.oxtilofastcal-block-preview .components-placeholder__instructions {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.oxtilofastcal-block-preview .components-placeholder__fieldset {
+    display: block;
+}
+
+.oxtilofastcal-block-info {
+    text-align: center;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.oxtilofastcal-block-info p {
+    margin: 0;
+    color: #666;
+    font-size: 13px;
+}
+
+/* Dark mode support */
+.is-dark-theme .oxtilofastcal-block-preview .components-placeholder {
+    background: linear-gradient(135deg, #2c3338 0%, #1e2428 100%);
+    border-color: #3582c4;
+}
+
+.is-dark-theme .oxtilofastcal-block-preview .components-placeholder__label {
+    color: #72aee6;
+}
+
+.is-dark-theme .oxtilofastcal-block-preview .components-placeholder__instructions {
+    color: #bbb;
+}
+
+.is-dark-theme .oxtilofastcal-block-info {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.is-dark-theme .oxtilofastcal-block-info p {
+    color: #aaa;
+}

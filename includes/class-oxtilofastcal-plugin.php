@@ -71,11 +71,7 @@ final class Oxtilofastcal_Plugin {
 	 * Load plugin textdomain.
 	 */
 	public function load_textdomain(): void {
-		load_plugin_textdomain(
-			'oxtilofastcal',
-			false,
-			dirname( plugin_basename( OXTILOFASTCAL_PLUGIN_FILE ) ) . '/languages'
-		);
+
 
 		// Built-in Polish translations without .mo compilation.
 		Oxtilofastcal_I18n_Fallback::init_if_needed();

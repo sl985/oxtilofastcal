@@ -16,11 +16,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $general  = get_option( 'oxtilofastcal_general', array() );
 $max_days = isset( $general['max_days_future'] ) ? absint( $general['max_days_future'] ) : 30;
-$max_date_attr = '';
+$max_date_val = '';
 if ( $max_days > 0 ) {
 	$max_dt = new DateTimeImmutable( 'now', wp_timezone() );
 	$max_dt = $max_dt->add( new DateInterval( 'P' . $max_days . 'D' ) );
-	$max_date_attr = 'max="' . esc_attr( $max_dt->format( 'Y-m-d' ) ) . '"';
+	$max_date_val = $max_dt->format( 'Y-m-d' );
 }
 
 $today_dt = new DateTimeImmutable( 'now', wp_timezone() );
@@ -102,10 +102,14 @@ $day_after_dt = $today_dt->add( new DateInterval( 'P2D' ) );
 					$label = $name;
 					$selected = ( 0 === $idx ) ? 'selected' : '';
 					if ( $duration > 0 ) {
-						$label .= ' (' . sprintf( __( '%d min', 'oxtilofastcal' ), $duration ) . ')';
+						$label .= ' (' . sprintf(
+							/* translators: %d: Service duration in minutes */
+							__( '%d min', 'oxtilofastcal' ),
+							$duration
+						) . ')';
 					}
 					?>
-					<option value="<?php echo esc_attr( (int) $idx ); ?>" data-type="<?php echo esc_attr( $type ); ?>" <?php echo $selected; ?>>
+					<option value="<?php echo esc_attr( (int) $idx ); ?>" data-type="<?php echo esc_attr( $type ); ?>" <?php echo esc_attr( $selected ); ?>>
 						<?php echo esc_html( $label ); ?>
 					</option>
 				<?php endforeach; ?>
@@ -121,7 +125,7 @@ $day_after_dt = $today_dt->add( new DateInterval( 'P2D' ) );
 				<button type="button" class="oxtilofastcal-date-btn" data-date="<?php echo esc_attr( $day_after_dt->format( 'Y-m-d' ) ); ?>"><?php echo esc_html__( 'Day after', 'oxtilofastcal' ); ?></button>
 			</div>
 			
-			<input type="date" id="oxtilofastcal_date" name="date" min="<?php echo esc_attr( $today_dt->format( 'Y-m-d' ) ); ?>" <?php echo $max_date_attr; ?> autocomplete="off" required />
+			<input type="date" id="oxtilofastcal_date" name="date" min="<?php echo esc_attr( $today_dt->format( 'Y-m-d' ) ); ?>" <?php if ( $max_date_val ) : ?>max="<?php echo esc_attr( $max_date_val ); ?>"<?php endif; ?> autocomplete="off" required />
 			<div class="oxtilofastcal-help">
 				<?php echo esc_html__( 'Pick a date to see available times.', 'oxtilofastcal' ); ?>
 			</div>

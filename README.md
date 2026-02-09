@@ -1,6 +1,6 @@
 # Oxtilo Fast Cal
 
-Custom booking plugin for WordPress with availability management, bookings, ICS export, and email notifications.
+A secure and flexible booking management system for WordPress. Features robust availability handling, ICS calendar synchronization, email notifications, and a full REST API. Includes built-in Polish translations.
 
 ## Features
 
@@ -85,6 +85,13 @@ add_filter( 'oxtilofastcal_delete_data_on_uninstall', '__return_false' );
 GPL v2 or later
 
 ## Changelog
+
+### 0.9.5
+- **Refactor**: Codebase improvements for WordPress.org plugin review standards.
+- **Fix**: Replaced discouraged functions (`unlink` -> `wp_delete_file`) for better hosting compatibility.
+- **Fix**: Removed redundant `load_plugin_textdomain` as translations are handled by WordPress.org.
+- **Security**: Enhanced output escaping and sanitization in admin views.
+- **I18n**: Fixed text domain inconsistencies and missing translation strings.
 
 ### 0.9.4
 - **Feature**: Added setting to include/hide "Manage Booking" link in the private calendar feed events.

@@ -58,8 +58,8 @@ final class Oxtilofastcal_Admin {
 	 */
 	public function register_menu(): void {
 		add_menu_page(
-			esc_html__( 'Oxtilofastcal', 'oxtilofastcal' ),
-			esc_html__( 'Oxtilofastcal', 'oxtilofastcal' ),
+			esc_html__( 'Oxtilo Fast Cal', 'oxtilofastcal' ),
+			esc_html__( 'Oxtilo Fast Cal', 'oxtilofastcal' ),
 			'manage_options',
 			'oxtilofastcal',
 			array( $this, 'render_settings_page' ),

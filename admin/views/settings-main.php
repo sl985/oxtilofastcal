@@ -41,7 +41,7 @@ $hours = wp_parse_args( $hours, array(
 ) );
 ?>
 <div class="wrap oxtilofastcal-admin">
-	<h1><?php echo esc_html__( 'Oxtilofastcal Settings', 'oxtilofastcal' ); ?></h1>
+	<h1><?php echo esc_html__( 'Oxtilo Fast Cal Settings', 'oxtilofastcal' ); ?></h1>
 
 	<div class="oxtilofastcal-admin__two-col">
 		<div class="oxtilofastcal-admin__col">
@@ -277,11 +277,11 @@ $hours = wp_parse_args( $hours, array(
 	<hr />
 
 	<h2><?php echo esc_html__( 'REST API', 'oxtilofastcal' ); ?></h2>
-	<p class="description"><?php echo esc_html__( 'External applications (e.g., Apple Shortcuts, Zapier) can integrate with Oxtilofastcal via REST API.', 'oxtilofastcal' ); ?></p>
+	<p class="description"><?php echo esc_html__( 'External applications (e.g., Apple Shortcuts, Zapier) can integrate with Oxtilo Fast Cal via REST API.', 'oxtilofastcal' ); ?></p>
 
 	<?php
-	$api_base_url = esc_url( rest_url( 'oxtilofastcal/v1/' ) );
-	$api_token    = isset( $general['api_token'] ) ? esc_attr( (string) $general['api_token'] ) : '';
+	$api_base_url = rest_url( 'oxtilofastcal/v1/' );
+	$api_token    = isset( $general['api_token'] ) ? (string) $general['api_token'] : '';
 	$example_date = wp_date( 'Y-m-d', strtotime( '+3 days' ) );
 	?>
 
@@ -301,7 +301,7 @@ $hours = wp_parse_args( $hours, array(
 					<label for="oxtilofastcal_api_token"><?php echo esc_html__( 'API Token (write access)', 'oxtilofastcal' ); ?></label>
 				</th>
 				<td>
-					<input type="text" class="large-text code" id="oxtilofastcal_api_token" value="<?php echo $api_token; ?>" readonly />
+					<input type="text" class="large-text code" id="oxtilofastcal_api_token" value="<?php echo esc_attr( $api_token ); ?>" readonly />
 					<p>
 						<button type="button" class="button" id="oxtilofastcal_generate_api_token_btn"><?php echo esc_html__( 'Generate new API token', 'oxtilofastcal' ); ?></button>
 						<span id="oxtilofastcal_api_token_status" class="oxtilofastcal-admin__status" aria-live="polite"></span>
@@ -312,7 +312,7 @@ $hours = wp_parse_args( $hours, array(
 		</table>
 
 		<p><?php echo esc_html__( 'All API requests require the API token in the HTTP header:', 'oxtilofastcal' ); ?></p>
-		<pre style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 4px; overflow-x: auto;">X-Oxtilofastcal-Token: <?php echo $api_token; ?></pre>
+		<pre style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 4px; overflow-x: auto;">X-Oxtilofastcal-Token: <?php echo esc_html( $api_token ); ?></pre>
 
 		<hr style="margin: 20px 0;" />
 
@@ -351,16 +351,16 @@ $hours = wp_parse_args( $hours, array(
 		</table>
 
 		<p><strong><?php echo esc_html__( 'Example request:', 'oxtilofastcal' ); ?></strong></p>
-		<pre style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 4px; overflow-x: auto;">curl -X GET "<?php echo $api_base_url; ?>slots?date=<?php echo $example_date; ?>&duration=60" \
-  -H "X-Oxtilofastcal-Token: <?php echo $api_token; ?>"</pre>
+		<pre style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 4px; overflow-x: auto;">curl -X GET "<?php echo esc_url( $api_base_url ); ?>slots?date=<?php echo esc_html( $example_date ); ?>&duration=60" \
+  -H "X-Oxtilofastcal-Token: <?php echo esc_html( $api_token ); ?>"</pre>
 
 		<p><strong><?php echo esc_html__( 'Example response:', 'oxtilofastcal' ); ?></strong></p>
 		<pre style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 4px; overflow-x: auto;">{
   "success": true,
-  "date": "<?php echo $example_date; ?>",
+  "date": "<?php echo esc_html( $example_date ); ?>",
   "slots": [
-    { "start": "<?php echo $example_date; ?> 09:00:00", "end": "<?php echo $example_date; ?> 10:00:00", "label": "09:00 - 10:00" },
-    { "start": "<?php echo $example_date; ?> 10:00:00", "end": "<?php echo $example_date; ?> 11:00:00", "label": "10:00 - 11:00" }
+    { "start": "<?php echo esc_html( $example_date ); ?> 09:00:00", "end": "<?php echo esc_html( $example_date ); ?> 10:00:00", "label": "09:00 - 10:00" },
+    { "start": "<?php echo esc_html( $example_date ); ?> 10:00:00", "end": "<?php echo esc_html( $example_date ); ?> 11:00:00", "label": "10:00 - 11:00" }
   ]
 }</pre>
 
@@ -425,13 +425,13 @@ $hours = wp_parse_args( $hours, array(
 		</table>
 
 		<p><strong><?php echo esc_html__( 'Example request:', 'oxtilofastcal' ); ?></strong></p>
-		<pre style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 4px; overflow-x: auto;">curl -X POST "<?php echo $api_base_url; ?>create" \
-  -H "X-Oxtilofastcal-Token: <?php echo $api_token; ?>" \
+		<pre style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 4px; overflow-x: auto;">curl -X POST "<?php echo esc_url( $api_base_url ); ?>create" \
+  -H "X-Oxtilofastcal-Token: <?php echo esc_html( $api_token ); ?>" \
   -H "Content-Type: application/json" \
   -d '{
     "client_name": "Jan Kowalski",
     "client_email": "jan@example.com",
-    "date": "<?php echo $example_date; ?>",
+    "date": "<?php echo esc_html( $example_date ); ?>",
     "time": "10:00",
     "duration": 60,
     "service_name": "Konsultacja"

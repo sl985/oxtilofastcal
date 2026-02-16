@@ -146,12 +146,12 @@ final class Oxtilofastcal_Database {
 		if ( '' === trim( $services_json ) ) {
 			$services = array(
 				array(
-					'name'     => __( 'Consultation (Online)', 'oxtilofastcal' ),
+					'name'     => __( 'Consultation (Online)', 'oxtilo-fast-cal' ),
 					'duration' => 30,
 					'type'     => 'online',
 				),
 				array(
-					'name'     => __( 'Consultation (In-person)', 'oxtilofastcal' ),
+					'name'     => __( 'Consultation (In-person)', 'oxtilo-fast-cal' ),
 					'duration' => 60,
 					'type'     => 'in_person',
 				),

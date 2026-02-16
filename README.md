@@ -86,6 +86,13 @@ GPL v2 or later
 
 ## Changelog
 
+### 0.9.6
+- **Security**: Improved nonce verification and permission checks.
+- **Refactor**: Replaced inline scripts and styles with `wp_enqueue_script` and `wp_enqueue_style`.
+- **Fix**: Corrected text domain to `oxtilo-fast-cal` matches plugin slug.
+- **Compatibility**: Updated Block API version to 3 for WordPress 7.0 readiness.
+- **Compatibility**: Tested up to WordPress 6.9.
+
 ### 0.9.5
 - **Refactor**: Codebase improvements for WordPress.org plugin review standards.
 - **Fix**: Replaced discouraged functions (`unlink` -> `wp_delete_file`) for better hosting compatibility.

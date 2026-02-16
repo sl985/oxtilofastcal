@@ -70,7 +70,7 @@ final class Oxtilofastcal_Blocks {
 		
 		// 3. Register Translations.
 		if ( function_exists( 'wp_set_script_translations' ) ) {
-			wp_set_script_translations( 'oxtilofastcal-block-editor', 'oxtilofastcal' );
+			wp_set_script_translations( 'oxtilofastcal-block-editor', 'oxtilo-fast-cal' );
 		}
 
 		// 4. Register Block Type (Dynamic).
@@ -79,7 +79,7 @@ final class Oxtilofastcal_Blocks {
 			'oxtilofastcal/booking-form',
 			array(
 				'api_version'     => 2,
-				'title'           => __( 'Oxtilofastcal Form', 'oxtilofastcal' ),
+				'title'           => __( 'Oxtilofastcal Form', 'oxtilo-fast-cal' ),
 				'category'        => 'widgets',
 				'icon'            => 'calendar-alt',
 				'attributes'      => array(),

@@ -36,7 +36,7 @@ final class Oxtilofastcal_Notifications {
 		$services   = oxtilofastcal_get_services();
 		$service_id = isset( $row['service_id'] ) ? absint( $row['service_id'] ) : 0;
 		$service    = $services[ $service_id ] ?? array(
-			'name'     => __( 'Service', 'oxtilofastcal' ),
+			'name'     => __( 'Service', 'oxtilo-fast-cal' ),
 			'duration' => 0,
 			'type'     => 'online',
 		);
@@ -60,7 +60,7 @@ final class Oxtilofastcal_Notifications {
 		$client_email = sanitize_email( $row['client_email'] ?? '' );
 		$client_name  = sanitize_text_field( $row['client_name'] ?? '' );
 		// Prefer stored service_name, fallback to service lookup by ID
-		$service_name = ! empty( $row['service_name'] ) ? sanitize_text_field( $row['service_name'] ) : sanitize_text_field( $service['name'] ?? __( 'Service', 'oxtilofastcal' ) );
+		$service_name = ! empty( $row['service_name'] ) ? sanitize_text_field( $row['service_name'] ) : sanitize_text_field( $service['name'] ?? __( 'Service', 'oxtilo-fast-cal' ) );
 		$service_type = (string) ( $service['type'] ?? 'online' );
 		$client_message = sanitize_textarea_field( $extras['client_message'] ?? '' );
 
@@ -69,7 +69,7 @@ final class Oxtilofastcal_Notifications {
 
 		$when_line = sprintf(
 			/* translators: 1: Date, 2: Start time, 3: End time */
-			__( 'When: %1$s (%2$s - %3$s)', 'oxtilofastcal' ),
+			__( 'When: %1$s (%2$s - %3$s)', 'oxtilo-fast-cal' ),
 			$start->format( $date_fmt ),
 			$start->format( $time_fmt ),
 			$end->format( $time_fmt )
@@ -149,28 +149,28 @@ final class Oxtilofastcal_Notifications {
 		} else {
 			// Default template (Text).
 			/* translators: %d: Booking ID */
-			$subject = sprintf( __( 'New booking confirmed (#%d)', 'oxtilofastcal' ), $replacements['{booking_id}'] );
+			$subject = sprintf( __( 'New booking confirmed (#%d)', 'oxtilo-fast-cal' ), $replacements['{booking_id}'] );
 			
 			$body = implode( "\n", array(
 				/* translators: %1$s: Booking ID */
-				sprintf( __( 'A new booking has been confirmed (ID: %1$s).', 'oxtilofastcal' ), $replacements['{booking_id}'] ),
+				sprintf( __( 'A new booking has been confirmed (ID: %1$s).', 'oxtilo-fast-cal' ), $replacements['{booking_id}'] ),
 				'',
 				/* translators: %s: Service name */
-				sprintf( __( 'Service: %s', 'oxtilofastcal' ), $replacements['{service_name}'] ),
+				sprintf( __( 'Service: %s', 'oxtilo-fast-cal' ), $replacements['{service_name}'] ),
 				$default_when_line,
 				/* translators: %s: Meeting link */
-				( ! empty( $replacements['{meet_link}'] ) ? sprintf( __( 'Join Meeting: %s', 'oxtilofastcal' ), $replacements['{meet_link}'] ) : '' ),
+				( ! empty( $replacements['{meet_link}'] ) ? sprintf( __( 'Join Meeting: %s', 'oxtilo-fast-cal' ), $replacements['{meet_link}'] ) : '' ),
 				/* translators: %s: Client name */
-				sprintf( __( 'Client: %s', 'oxtilofastcal' ), $replacements['{client_name}'] ),
+				sprintf( __( 'Client: %s', 'oxtilo-fast-cal' ), $replacements['{client_name}'] ),
 				/* translators: %s: Client email */
-				sprintf( __( 'Email: %s', 'oxtilofastcal' ), $replacements['{client_email}'] ),
+				sprintf( __( 'Email: %s', 'oxtilo-fast-cal' ), $replacements['{client_email}'] ),
 				/* translators: %s: Client message */
-				( ! empty( $replacements['{client_message}'] ) ? sprintf( __( 'Message: %s', 'oxtilofastcal' ), $replacements['{client_message}'] ) : '' ),
+				( ! empty( $replacements['{client_message}'] ) ? sprintf( __( 'Message: %s', 'oxtilo-fast-cal' ), $replacements['{client_message}'] ) : '' ),
 				'',
 				/* translators: %s: Edit link */
-				sprintf( __( 'Manage Booking: %s', 'oxtilofastcal' ), $replacements['{edit_link}'] ),
+				sprintf( __( 'Manage Booking: %s', 'oxtilo-fast-cal' ), $replacements['{edit_link}'] ),
 				'',
-				__( 'ICS file attached.', 'oxtilofastcal' ),
+				__( 'ICS file attached.', 'oxtilo-fast-cal' ),
 			) );
 			$headers = array( 'Content-Type: text/plain; charset=UTF-8' );
 		}
@@ -194,40 +194,40 @@ final class Oxtilofastcal_Notifications {
 		} else {
 			// Default template (Text).
 			/* translators: %s: Service name */
-			$subject = sprintf( __( 'Booking confirmed: %s', 'oxtilofastcal' ), $replacements['{service_name}'] );
+			$subject = sprintf( __( 'Booking confirmed: %s', 'oxtilo-fast-cal' ), $replacements['{service_name}'] );
 
 			$body_lines = array(
 				/* translators: %s: Client name */
-				sprintf( __( 'Hello %s,', 'oxtilofastcal' ), $replacements['{client_name}'] ?: __( 'there', 'oxtilofastcal' ) ),
+				sprintf( __( 'Hello %s,', 'oxtilo-fast-cal' ), $replacements['{client_name}'] ?: __( 'there', 'oxtilo-fast-cal' ) ),
 				'',
-				__( 'Your booking is confirmed.', 'oxtilofastcal' ),
+				__( 'Your booking is confirmed.', 'oxtilo-fast-cal' ),
 				'',
 				/* translators: %s: Service name */
-				sprintf( __( 'Service: %s', 'oxtilofastcal' ), $replacements['{service_name}'] ),
+				sprintf( __( 'Service: %s', 'oxtilo-fast-cal' ), $replacements['{service_name}'] ),
 				$default_when_line,
 			);
 
 			if ( 'online' === $service_type ) {
 				$body_lines[] = '';
-				$body_lines[] = __( 'Online meeting details:', 'oxtilofastcal' );
-				$body_lines[] = $meet_link ? ( __( 'Join link:', 'oxtilofastcal' ) . ' ' . $meet_link ) : __( 'Join link: (to be provided)', 'oxtilofastcal' );
+				$body_lines[] = __( 'Online meeting details:', 'oxtilo-fast-cal' );
+				$body_lines[] = $meet_link ? ( __( 'Join link:', 'oxtilo-fast-cal' ) . ' ' . $meet_link ) : __( 'Join link: (to be provided)', 'oxtilo-fast-cal' );
 			} else {
 				$body_lines[] = '';
-				$body_lines[] = __( 'In-person meeting details:', 'oxtilofastcal' );
-				$body_lines[] = __( 'Address: (to be provided)', 'oxtilofastcal' );
+				$body_lines[] = __( 'In-person meeting details:', 'oxtilo-fast-cal' );
+				$body_lines[] = __( 'Address: (to be provided)', 'oxtilo-fast-cal' );
 			}
 
 			if ( ! empty( $replacements['{client_message}'] ) ) {
 				$body_lines[] = '';
 				/* translators: %s: Client message */
-				$body_lines[] = sprintf( __( 'Your message: %s', 'oxtilofastcal' ), $replacements['{client_message}'] );
+				$body_lines[] = sprintf( __( 'Your message: %s', 'oxtilo-fast-cal' ), $replacements['{client_message}'] );
 			}
 
 			$body_lines[] = '';
-			$body_lines[] = __( 'You can manage your booking here:', 'oxtilofastcal' );
+			$body_lines[] = __( 'You can manage your booking here:', 'oxtilo-fast-cal' );
 			$body_lines[] = $replacements['{edit_link}'];
 			$body_lines[] = '';
-			$body_lines[] = __( 'An ICS calendar invite is attached to this email.', 'oxtilofastcal' );
+			$body_lines[] = __( 'An ICS calendar invite is attached to this email.', 'oxtilo-fast-cal' );
 
 			$body    = implode( "\n", $body_lines );
 			$headers = array( 'Content-Type: text/plain; charset=UTF-8' );
@@ -305,7 +305,7 @@ final class Oxtilofastcal_Notifications {
 				$admin_name = isset( $general['admin_name'] ) ? trim( $general['admin_name'] ) : '';
 				
 				// Fallback if admin name is not set
-				$title = ! empty( $admin_name ) ? $admin_name : ( ! empty( $stored_service_name ) ? $stored_service_name : __( 'Booking', 'oxtilofastcal' ) );
+				$title = ! empty( $admin_name ) ? $admin_name : ( ! empty( $stored_service_name ) ? $stored_service_name : __( 'Booking', 'oxtilo-fast-cal' ) );
 				$summary = sprintf( '%s #%d', $title, $id );
 			} elseif ( ! empty( $client_name ) ) {
 				// Admin view: Use client name
@@ -315,7 +315,7 @@ final class Oxtilofastcal_Notifications {
 			}
 		} else {
 			// Custom service name: use service_name as title
-			$display_name = ! empty( $stored_service_name ) ? $stored_service_name : __( 'Service', 'oxtilofastcal' );
+			$display_name = ! empty( $stored_service_name ) ? $stored_service_name : __( 'Service', 'oxtilo-fast-cal' );
 			$summary = sprintf( '%s #%d', $display_name, $id );
 		}
 		
@@ -326,15 +326,15 @@ final class Oxtilofastcal_Notifications {
 
 		$description_lines = array();
 		if ( ! empty( $meet_link ) ) {
-			$description_lines[] = __( 'Join Meeting:', 'oxtilofastcal' ) . ' ' . $meet_link;
+			$description_lines[] = __( 'Join Meeting:', 'oxtilo-fast-cal' ) . ' ' . $meet_link;
 		}
 		if ( ! empty( $edit_link ) ) {
 			$description_lines[] = '';
-			$description_lines[] = __( 'Manage Booking:', 'oxtilofastcal' ) . ' ' . $edit_link;
+			$description_lines[] = __( 'Manage Booking:', 'oxtilo-fast-cal' ) . ' ' . $edit_link;
 		}
 		if ( ! empty( $client_message ) ) {
 			$description_lines[] = '';
-			$description_lines[] = __( 'Message:', 'oxtilofastcal' ) . ' ' . $client_message;
+			$description_lines[] = __( 'Message:', 'oxtilo-fast-cal' ) . ' ' . $client_message;
 		}
 		
 		$description = implode( "\n", $description_lines );
@@ -388,7 +388,7 @@ final class Oxtilofastcal_Notifications {
 		$services   = oxtilofastcal_get_services();
 		$service_id = isset( $row['service_id'] ) ? absint( $row['service_id'] ) : 0;
 		$service    = $services[ $service_id ] ?? array(
-			'name'     => __( 'Service', 'oxtilofastcal' ),
+			'name'     => __( 'Service', 'oxtilo-fast-cal' ),
 			'duration' => 0,
 			'type'     => 'online',
 		);
@@ -413,7 +413,7 @@ final class Oxtilofastcal_Notifications {
 		$client_email = sanitize_email( $row['client_email'] ?? '' );
 		$client_name  = sanitize_text_field( $row['client_name'] ?? '' );
 		// Prefer stored service_name, fallback to service lookup by ID
-		$service_name = ! empty( $row['service_name'] ) ? sanitize_text_field( $row['service_name'] ) : sanitize_text_field( $service['name'] ?? __( 'Service', 'oxtilofastcal' ) );
+		$service_name = ! empty( $row['service_name'] ) ? sanitize_text_field( $row['service_name'] ) : sanitize_text_field( $service['name'] ?? __( 'Service', 'oxtilo-fast-cal' ) );
 		$service_type = (string) ( $service['type'] ?? 'online' );
 
 		// Prepare common variables.
@@ -424,7 +424,7 @@ final class Oxtilofastcal_Notifications {
 
 		$when_line = sprintf(
 			/* translators: 1: Date, 2: Start time, 3: End time */
-			__( 'When: %1$s (%2$s - %3$s)', 'oxtilofastcal' ),
+			__( 'When: %1$s (%2$s - %3$s)', 'oxtilo-fast-cal' ),
 			$start->format( $date_fmt ),
 			$start->format( $time_fmt ),
 			$end->format( $time_fmt )
@@ -470,19 +470,19 @@ final class Oxtilofastcal_Notifications {
 			$subject_tpl = $templates['cancel_subject'] ?? '';
 			$body_tpl    = $templates['cancel_body'] ?? '';
 			/* translators: %s: Service name */
-			$default_subject = sprintf( __( 'Booking cancelled: %s', 'oxtilofastcal' ), $service_name );
+			$default_subject = sprintf( __( 'Booking cancelled: %s', 'oxtilo-fast-cal' ), $service_name );
 			/* translators: %s: Client name */
-			$default_body    = sprintf( __( 'Hello %s, your booking has been cancelled.', 'oxtilofastcal' ), $client_name ) . "\n\n" . $when_line;
+			$default_body    = sprintf( __( 'Hello %s, your booking has been cancelled.', 'oxtilo-fast-cal' ), $client_name ) . "\n\n" . $when_line;
 		} else {
 			$subject_tpl = $templates['update_subject'] ?? '';
 			$body_tpl    = $templates['update_body'] ?? '';
 			/* translators: %s: Service name */
-			$default_subject = sprintf( __( 'Booking updated: %s', 'oxtilofastcal' ), $service_name );
+			$default_subject = sprintf( __( 'Booking updated: %s', 'oxtilo-fast-cal' ), $service_name );
 			/* translators: %s: Client name */
-			$default_body    = sprintf( __( 'Hello %s, your booking details have been updated.', 'oxtilofastcal' ), $client_name ) . "\n\n" . $when_line;
+			$default_body    = sprintf( __( 'Hello %s, your booking details have been updated.', 'oxtilo-fast-cal' ), $client_name ) . "\n\n" . $when_line;
 			if ( ! empty( $meet_link ) && 'online' === $service_type ) {
 				/* translators: %s: Meeting link */
-				$default_body .= "\n" . sprintf( __( 'Join Meeting: %s', 'oxtilofastcal' ), $meet_link );
+				$default_body .= "\n" . sprintf( __( 'Join Meeting: %s', 'oxtilo-fast-cal' ), $meet_link );
 			}
 		}
 

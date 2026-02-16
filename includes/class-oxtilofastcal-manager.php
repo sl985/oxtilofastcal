@@ -83,7 +83,7 @@ class Oxtilofastcal_Manager {
 
 		$booking = Oxtilofastcal_Database::get_booking_by_hash( $hash );
 		if ( ! $booking ) {
-			wp_die( esc_html__( 'Invalid booking link.', 'oxtilofastcal' ), 404 );
+			wp_die( esc_html__( 'Invalid booking link.', 'oxtilo-fast-cal' ), 404 );
 		}
 
 		// Handle POST actions.
@@ -99,11 +99,11 @@ class Oxtilofastcal_Manager {
 			'nonce'   => wp_create_nonce( 'oxtilofastcal_get_slots' ),
 			'booking_id' => $booking['id'],
 			'i18n'    => array(
-				'selectService' => __( 'Please select a service.', 'oxtilofastcal' ),
-				'selectDate'    => __( 'Please choose a date.', 'oxtilofastcal' ),
-				'loading'       => __( 'Loading available times…', 'oxtilofastcal' ),
-				'noSlots'       => __( 'No available time slots for this date.', 'oxtilofastcal' ),
-				'chooseTime'    => __( 'Choose a time slot', 'oxtilofastcal' ),
+				'selectService' => __( 'Please select a service.', 'oxtilo-fast-cal' ),
+				'selectDate'    => __( 'Please choose a date.', 'oxtilo-fast-cal' ),
+				'loading'       => __( 'Loading available times…', 'oxtilo-fast-cal' ),
+				'noSlots'       => __( 'No available time slots for this date.', 'oxtilo-fast-cal' ),
+				'chooseTime'    => __( 'Choose a time slot', 'oxtilo-fast-cal' ),
 			),
 		) );
 

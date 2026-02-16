@@ -85,8 +85,8 @@ final class Oxtilofastcal_ICS_Feed {
 
 		if ( '' === $saved || ! hash_equals( $saved, $token ) ) {
 			wp_die(
-				esc_html__( 'Access Denied', 'oxtilofastcal' ),
-				esc_html__( 'Access Denied', 'oxtilofastcal' ),
+				esc_html__( 'Access Denied', 'oxtilo-fast-cal' ),
+				esc_html__( 'Access Denied', 'oxtilo-fast-cal' ),
 				array( 'response' => 403 )
 			);
 		}
@@ -177,7 +177,7 @@ final class Oxtilofastcal_ICS_Feed {
 			// Build summary: use client name for predefined services, service_name for custom
 			if ( $is_predefined_service ) {
 				// Predefined service: use client name as title
-				$summary = ( '' !== $name ) ? $name . ' #' . $id : __( 'Booking', 'oxtilofastcal' ) . ' #' . $id;
+				$summary = ( '' !== $name ) ? $name . ' #' . $id : __( 'Booking', 'oxtilo-fast-cal' ) . ' #' . $id;
 			} else {
 				// Custom service name: use service_name as title
 				$summary = $stored_service_name . ' #' . $id;
@@ -191,27 +191,27 @@ final class Oxtilofastcal_ICS_Feed {
 			$description_lines = array();
 
 			if ( '' !== $email ) {
-				$description_lines[] = __( 'Email:', 'oxtilofastcal' ) . ' ' . $email;
+				$description_lines[] = __( 'Email:', 'oxtilo-fast-cal' ) . ' ' . $email;
 			}
 			
 			if ( ! empty( $client_message ) ) {
-				$description_lines[] = __( 'Message:', 'oxtilofastcal' ) . ' ' . $client_message;
+				$description_lines[] = __( 'Message:', 'oxtilo-fast-cal' ) . ' ' . $client_message;
 			}
 			
 			if ( 'online' === $meeting_type ) {
 				$meet_link = isset( $general['google_meet_link'] ) ? (string) $general['google_meet_link'] : '';
 				if ( ! empty( $meet_link ) ) {
-					$description_lines[] = __( 'Join Meeting:', 'oxtilofastcal' ) . ' ' . $meet_link;
+					$description_lines[] = __( 'Join Meeting:', 'oxtilo-fast-cal' ) . ' ' . $meet_link;
 				} else {
-					$description_lines[] = __( 'Meeting Type: Online', 'oxtilofastcal' );
+					$description_lines[] = __( 'Meeting Type: Online', 'oxtilo-fast-cal' );
 				}
 			} else {
-				$description_lines[] = __( 'Meeting Type: In-person', 'oxtilofastcal' );
+				$description_lines[] = __( 'Meeting Type: In-person', 'oxtilo-fast-cal' );
 			}
 
 			if ( ! empty( $general['include_manage_link'] ) ) {
 				$description_lines[] = '';
-				$description_lines[] = __( 'Manage Booking:', 'oxtilofastcal' ) . ' ' . $edit_link;
+				$description_lines[] = __( 'Manage Booking:', 'oxtilo-fast-cal' ) . ' ' . $edit_link;
 			}
 
 			$description = implode( "\n", $description_lines );

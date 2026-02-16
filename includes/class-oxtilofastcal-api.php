@@ -151,7 +151,7 @@ final class Oxtilofastcal_API {
 		if ( empty( $saved_token ) || empty( $token_header ) || ! hash_equals( $saved_token, $token_header ) ) {
 			return new WP_Error(
 				'rest_forbidden',
-				__( 'Invalid or missing API token.', 'oxtilofastcal' ),
+				__( 'Invalid or missing API token.', 'oxtilo-fast-cal' ),
 				array( 'status' => 403 )
 			);
 		}
@@ -216,7 +216,7 @@ final class Oxtilofastcal_API {
 			if ( $requested_date > $max_date ) {
 				return new WP_Error(
 					'date_too_far',
-					__( 'Date is too far in the future.', 'oxtilofastcal' ),
+					__( 'Date is too far in the future.', 'oxtilo-fast-cal' ),
 					array( 'status' => 400 )
 				);
 			}
@@ -283,7 +283,7 @@ final class Oxtilofastcal_API {
 		} catch ( Exception $e ) {
 			return new WP_Error(
 				'invalid_datetime',
-				__( 'Invalid date or time format.', 'oxtilofastcal' ),
+				__( 'Invalid date or time format.', 'oxtilo-fast-cal' ),
 				array( 'status' => 400 )
 			);
 		}
@@ -294,7 +294,7 @@ final class Oxtilofastcal_API {
 		if ( Oxtilofastcal_Availability::interval_overlaps_any( $start_dt, $end_dt, $busy_intervals ) ) {
 			return new WP_Error(
 				'conflict',
-				__( 'Termin jest już zajęty.', 'oxtilofastcal' ),
+				__( 'Termin jest już zajęty.', 'oxtilo-fast-cal' ),
 				array( 'status' => 409 )
 			);
 		}
@@ -318,13 +318,13 @@ final class Oxtilofastcal_API {
 			if ( 'conflict' === $result['error'] ) {
 				return new WP_Error(
 					'conflict',
-					__( 'Termin jest już zajęty.', 'oxtilofastcal' ),
+					__( 'Termin jest już zajęty.', 'oxtilo-fast-cal' ),
 					array( 'status' => 409 )
 				);
 			}
 			return new WP_Error(
 				'insert_failed',
-				__( 'Failed to create booking.', 'oxtilofastcal' ),
+				__( 'Failed to create booking.', 'oxtilo-fast-cal' ),
 				array( 'status' => 500 )
 			);
 		}
@@ -338,7 +338,7 @@ final class Oxtilofastcal_API {
 			array(
 				'success'    => true,
 				'booking_id' => $booking_id,
-				'message'    => __( 'Rezerwacja utworzona pomyślnie.', 'oxtilofastcal' ),
+				'message'    => __( 'Rezerwacja utworzona pomyślnie.', 'oxtilo-fast-cal' ),
 			),
 			201
 		);

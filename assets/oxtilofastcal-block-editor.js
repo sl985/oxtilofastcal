@@ -28,15 +28,15 @@
 
     // Register block type
     wp.blocks.registerBlockType('oxtilofastcal/booking-form', {
-        title: __('Oxtilofastcal Form', 'oxtilofastcal'),
-        description: __('Display the booking form.', 'oxtilofastcal'),
+        title: __('Oxtilofastcal Form', 'oxtilo-fast-cal'),
+        description: __('Display the booking form.', 'oxtilo-fast-cal'),
         icon: calendarIcon,
         category: 'widgets',
         keywords: [
-            __('booking', 'oxtilofastcal'),
-            __('calendar', 'oxtilofastcal'),
-            __('reservation', 'oxtilofastcal'),
-            __('appointment', 'oxtilofastcal')
+            __('booking', 'oxtilo-fast-cal'),
+            __('calendar', 'oxtilo-fast-cal'),
+            __('reservation', 'oxtilo-fast-cal'),
+            __('appointment', 'oxtilo-fast-cal')
         ],
         supports: {
             html: false,
@@ -56,8 +56,8 @@
                     Placeholder,
                     {
                         icon: calendarIcon,
-                        label: __('Oxtilofastcal Booking Form', 'oxtilofastcal'),
-                        instructions: __('The booking form will be displayed here on the frontend.', 'oxtilofastcal')
+                        label: __('Oxtilofastcal Booking Form', 'oxtilo-fast-cal'),
+                        instructions: __('The booking form will be displayed here on the frontend.', 'oxtilo-fast-cal')
                     },
                     el(
                         'div',
@@ -65,7 +65,7 @@
                         el(
                             'p',
                             {},
-                            __('Configure services and availability in Oxtilofastcal settings.', 'oxtilofastcal')
+                            __('Configure services and availability in Oxtilofastcal settings.', 'oxtilo-fast-cal')
                         )
                     )
                 )

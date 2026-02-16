@@ -58,11 +58,11 @@ final class Oxtilofastcal_Shortcode {
 			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 			'nonce'   => wp_create_nonce( 'oxtilofastcal_get_slots' ),
 			'i18n'    => array(
-				'selectService' => __( 'Please select a service.', 'oxtilofastcal' ),
-				'selectDate'    => __( 'Please choose a date.', 'oxtilofastcal' ),
-				'loading'       => __( 'Loading available times…', 'oxtilofastcal' ),
-				'noSlots'       => __( 'No available time slots for this date.', 'oxtilofastcal' ),
-				'chooseTime'    => __( 'Choose a time slot', 'oxtilofastcal' ),
+				'selectService' => __( 'Please select a service.', 'oxtilo-fast-cal' ),
+				'selectDate'    => __( 'Please choose a date.', 'oxtilo-fast-cal' ),
+				'loading'       => __( 'Loading available times…', 'oxtilo-fast-cal' ),
+				'noSlots'       => __( 'No available time slots for this date.', 'oxtilo-fast-cal' ),
+				'chooseTime'    => __( 'Choose a time slot', 'oxtilo-fast-cal' ),
 			),
 		) );
 	}
@@ -79,7 +79,7 @@ final class Oxtilofastcal_Shortcode {
 
 		$services = oxtilofastcal_get_services();
 		if ( empty( $services ) ) {
-			return '<div class="oxtilofastcal-form oxtilofastcal-form--empty">' . esc_html__( 'No services available.', 'oxtilofastcal' ) . '</div>';
+			return '<div class="oxtilofastcal-form oxtilofastcal-form--empty">' . esc_html__( 'No services available.', 'oxtilo-fast-cal' ) . '</div>';
 		}
 
 		$return_url = get_permalink() ?: home_url( '/' );
@@ -111,11 +111,11 @@ final class Oxtilofastcal_Shortcode {
 			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 			'nonce'   => wp_create_nonce( 'oxtilofastcal_get_slots' ),
 			'i18n'    => array(
-				'selectService' => __( 'Please select a service.', 'oxtilofastcal' ),
-				'selectDate'    => __( 'Please choose a date.', 'oxtilofastcal' ),
-				'loading'       => __( 'Loading available times…', 'oxtilofastcal' ),
-				'noSlots'       => __( 'No available time slots for this date.', 'oxtilofastcal' ),
-				'chooseTime'    => __( 'Choose a time slot', 'oxtilofastcal' ),
+				'selectService' => __( 'Please select a service.', 'oxtilo-fast-cal' ),
+				'selectDate'    => __( 'Please choose a date.', 'oxtilo-fast-cal' ),
+				'loading'       => __( 'Loading available times…', 'oxtilo-fast-cal' ),
+				'noSlots'       => __( 'No available time slots for this date.', 'oxtilo-fast-cal' ),
+				'chooseTime'    => __( 'Choose a time slot', 'oxtilo-fast-cal' ),
 			),
 		) );
 	}

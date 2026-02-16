@@ -65,7 +65,7 @@ final class Oxtilofastcal_Ajax {
 		$booking_id = isset( $_POST['booking_id'] ) ? absint( $_POST['booking_id'] ) : 0;
 
 		if ( '' === $date || ! preg_match( '/^\d{4}-\d{2}-\d{2}$/', $date ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Invalid request.', 'oxtilofastcal' ) ), 400 );
+			wp_send_json_error( array( 'message' => esc_html__( 'Invalid request.', 'oxtilo-fast-cal' ) ), 400 );
 		}
 
 		// Validate max days in future.
@@ -77,7 +77,7 @@ final class Oxtilofastcal_Ajax {
 			$requested_date = new DateTimeImmutable( $date, wp_timezone() );
 			
 			if ( $requested_date > $max_date ) {
-				wp_send_json_error( array( 'message' => esc_html__( 'Date is too far in the future.', 'oxtilofastcal' ) ), 400 );
+				wp_send_json_error( array( 'message' => esc_html__( 'Date is too far in the future.', 'oxtilo-fast-cal' ) ), 400 );
 			}
 		}
 
@@ -115,34 +115,34 @@ final class Oxtilofastcal_Ajax {
 		if ( ! empty( $security['antibot_enabled'] ) ) {
 			// 1. Honeypot check.
 			if ( ! empty( $_POST['oxtilofastcal_website'] ) ) {
-				wp_die( esc_html__( 'Bot detected', 'oxtilofastcal' ), esc_html__( 'Error', 'oxtilofastcal' ), array( 'response' => 403 ) );
+				wp_die( esc_html__( 'Bot detected', 'oxtilo-fast-cal' ), esc_html__( 'Error', 'oxtilo-fast-cal' ), array( 'response' => 403 ) );
 			}
 
 			// 2. Nonce check.
 			if ( ! check_ajax_referer( 'oxtilofastcal_booking_action', 'oxtilofastcal_security', false ) ) {
-				wp_die( esc_html__( 'Security check failed', 'oxtilofastcal' ), esc_html__( 'Error', 'oxtilofastcal' ), array( 'response' => 403 ) );
+				wp_die( esc_html__( 'Security check failed', 'oxtilo-fast-cal' ), esc_html__( 'Error', 'oxtilo-fast-cal' ), array( 'response' => 403 ) );
 			}
 
 			// 3. JS & Time Trap check.
 			$valid_token = isset( $_POST['oxtilofastcal_valid'] ) ? sanitize_text_field( wp_unslash( $_POST['oxtilofastcal_valid'] ) ) : '';
 
 			if ( empty( $valid_token ) ) {
-				wp_die( esc_html__( 'Bot detected (No JS)', 'oxtilofastcal' ), esc_html__( 'Error', 'oxtilofastcal' ), array( 'response' => 403 ) );
+				wp_die( esc_html__( 'Bot detected (No JS)', 'oxtilo-fast-cal' ), esc_html__( 'Error', 'oxtilo-fast-cal' ), array( 'response' => 403 ) );
 			}
 
 			if ( 0 !== strpos( $valid_token, 'human_verified_' ) ) {
-				wp_die( esc_html__( 'Bot detected (Invalid Token)', 'oxtilofastcal' ), esc_html__( 'Error', 'oxtilofastcal' ), array( 'response' => 403 ) );
+				wp_die( esc_html__( 'Bot detected (Invalid Token)', 'oxtilo-fast-cal' ), esc_html__( 'Error', 'oxtilo-fast-cal' ), array( 'response' => 403 ) );
 			}
 
 			$duration = (int) str_replace( 'human_verified_', '', $valid_token );
 
 			if ( $duration < 3000 ) {
-				wp_die( esc_html__( 'Bot detected (Too Fast)', 'oxtilofastcal' ), esc_html__( 'Error', 'oxtilofastcal' ), array( 'response' => 403 ) );
+				wp_die( esc_html__( 'Bot detected (Too Fast)', 'oxtilo-fast-cal' ), esc_html__( 'Error', 'oxtilo-fast-cal' ), array( 'response' => 403 ) );
 			}
 		} else {
 			// Fallback: standard nonce check only.
 			if ( ! isset( $_POST['oxtilofastcal_booking_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['oxtilofastcal_booking_nonce'] ) ), 'oxtilofastcal_submit_booking' ) ) {
-				wp_die( esc_html__( 'Access Denied', 'oxtilofastcal' ), esc_html__( 'Access Denied', 'oxtilofastcal' ), array( 'response' => 403 ) );
+				wp_die( esc_html__( 'Access Denied', 'oxtilo-fast-cal' ), esc_html__( 'Access Denied', 'oxtilo-fast-cal' ), array( 'response' => 403 ) );
 			}
 		}
 

@@ -58,10 +58,10 @@ final class Oxtilofastcal_Admin {
 	 */
 	public function register_menu(): void {
 		add_menu_page(
-			esc_html__( 'Oxtilo Fast Cal', 'oxtilofastcal' ),
-			esc_html__( 'Oxtilo Fast Cal', 'oxtilofastcal' ),
+			esc_html__( 'Oxtilo Fast Cal', 'oxtilo-fast-cal' ),
+			esc_html__( 'Oxtilo Fast Cal', 'oxtilo-fast-cal' ),
 			'manage_options',
-			'oxtilofastcal',
+			'oxtilo-fast-cal',
 			array( $this, 'render_settings_page' ),
 			'dashicons-calendar-alt',
 			56
@@ -69,19 +69,19 @@ final class Oxtilofastcal_Admin {
 
 		// 1. Settings (Default).
 		add_submenu_page(
-			'oxtilofastcal',
-			esc_html__( 'Settings', 'oxtilofastcal' ),
-			esc_html__( 'Settings', 'oxtilofastcal' ),
+			'oxtilo-fast-cal',
+			esc_html__( 'Settings', 'oxtilo-fast-cal' ),
+			esc_html__( 'Settings', 'oxtilo-fast-cal' ),
 			'manage_options',
-			'oxtilofastcal',
+			'oxtilo-fast-cal',
 			array( $this, 'render_settings_page' )
 		);
 
 		// 2. Email Templates.
 		add_submenu_page(
-			'oxtilofastcal',
-			esc_html__( 'Email Templates', 'oxtilofastcal' ),
-			esc_html__( 'Email Templates', 'oxtilofastcal' ),
+			'oxtilo-fast-cal',
+			esc_html__( 'Email Templates', 'oxtilo-fast-cal' ),
+			esc_html__( 'Email Templates', 'oxtilo-fast-cal' ),
 			'manage_options',
 			'oxtilofastcal-email-templates',
 			array( $this, 'render_email_templates_page' )
@@ -89,9 +89,9 @@ final class Oxtilofastcal_Admin {
 
 		// 3. Security.
 		add_submenu_page(
-			'oxtilofastcal',
-			esc_html__( 'Security', 'oxtilofastcal' ),
-			esc_html__( 'Security', 'oxtilofastcal' ),
+			'oxtilo-fast-cal',
+			esc_html__( 'Security', 'oxtilo-fast-cal' ),
+			esc_html__( 'Security', 'oxtilo-fast-cal' ),
 			'manage_options',
 			'oxtilofastcal-security',
 			array( $this, 'render_security_page' )
@@ -99,9 +99,9 @@ final class Oxtilofastcal_Admin {
 
 		// 4. Diagnostics.
 		add_submenu_page(
-			'oxtilofastcal',
-			esc_html__( 'Diagnostics', 'oxtilofastcal' ),
-			esc_html__( 'Diagnostics', 'oxtilofastcal' ),
+			'oxtilo-fast-cal',
+			esc_html__( 'Diagnostics', 'oxtilo-fast-cal' ),
+			esc_html__( 'Diagnostics', 'oxtilo-fast-cal' ),
 			'manage_options',
 			'oxtilofastcal-diagnostics',
 			array( $this, 'render_diagnostics_page' )
@@ -109,9 +109,9 @@ final class Oxtilofastcal_Admin {
 
 		// 5. Bookings.
 		add_submenu_page(
-			'oxtilofastcal',
-			esc_html__( 'Bookings', 'oxtilofastcal' ),
-			esc_html__( 'Bookings', 'oxtilofastcal' ),
+			'oxtilo-fast-cal',
+			esc_html__( 'Bookings', 'oxtilo-fast-cal' ),
+			esc_html__( 'Bookings', 'oxtilo-fast-cal' ),
 			'manage_options',
 			'oxtilofastcal-bookings',
 			array( $this, 'render_bookings_page' )
@@ -143,14 +143,58 @@ final class Oxtilofastcal_Admin {
 			'testNonce' => wp_create_nonce( 'oxtilofastcal_test_ics_feed' ),
 			'diagNonce' => wp_create_nonce( 'oxtilofastcal_diagnostics' ),
 			'i18n'    => array(
-				'generating' => __( 'Generating…', 'oxtilofastcal' ),
-				'generated'  => __( 'New token generated.', 'oxtilofastcal' ),
-				'error'      => __( 'Could not generate token.', 'oxtilofastcal' ),
-				'feedUrl'    => __( 'Feed URL:', 'oxtilofastcal' ),
-				'loading'    => __( 'Loading…', 'oxtilofastcal' ),
+				'generating' => __( 'Generating…', 'oxtilo-fast-cal' ),
+				'generated'  => __( 'New token generated.', 'oxtilo-fast-cal' ),
+				'error'      => __( 'Could not generate token.', 'oxtilo-fast-cal' ),
+				'feedUrl'    => __( 'Feed URL:', 'oxtilo-fast-cal' ),
+				'loading'    => __( 'Loading…', 'oxtilo-fast-cal' ),
 			),
 			'feedUrl' => $feed_url,
 		) );
+
+		// Bookings page: enqueue bookings JS and inline badge CSS.
+		if ( strpos( $hook, 'oxtilofastcal-bookings' ) !== false ) {
+			wp_enqueue_script(
+				'oxtilofastcal-admin-bookings',
+				OXTILOFASTCAL_PLUGIN_URL . 'assets/oxtilofastcal-admin-bookings.js',
+				array( 'jquery' ),
+				OXTILOFASTCAL_VERSION,
+				true
+			);
+
+			wp_localize_script( 'oxtilofastcal-admin-bookings', 'oxtilofastcalBookings', array(
+				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+				'nonce'   => wp_create_nonce( 'oxtilofastcal_get_slots' ),
+				'i18n'    => array(
+					'selectDateFirst' => __( 'Please select a date first.', 'oxtilo-fast-cal' ),
+					'loading'         => __( 'Loading...', 'oxtilo-fast-cal' ),
+					'noSlots'         => __( 'No available slots for this date. You can still enter custom times.', 'oxtilo-fast-cal' ),
+					'errorSlots'      => __( 'Error loading slots. You can still enter custom times.', 'oxtilo-fast-cal' ),
+					'enterStartFirst' => __( 'Please enter a start time first.', 'oxtilo-fast-cal' ),
+				),
+			) );
+
+			$bookings_css = '.oxtilofastcal-badge {'
+				. 'display: inline-block;'
+				. 'padding: 3px 8px;'
+				. 'border-radius: 3px;'
+				. 'font-size: 12px;'
+				. 'font-weight: 500;'
+				. '}'
+				. '.oxtilofastcal-badge--success {'
+				. 'background: #e7f7ed;'
+				. 'color: #107c10;'
+				. '}'
+				. '.oxtilofastcal-badge--error {'
+				. 'background: #fde7e9;'
+				. 'color: #d63638;'
+				. '}'
+				. '.required {'
+				. 'color: #d63638;'
+				. '}';
+
+			wp_add_inline_style( 'oxtilofastcal-admin', $bookings_css );
+		}
 	}
 
 	/**
@@ -158,7 +202,7 @@ final class Oxtilofastcal_Admin {
 	 */
 	public function ajax_generate_token(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Access Denied', 'oxtilofastcal' ) ), 403 );
+			wp_send_json_error( array( 'message' => esc_html__( 'Access Denied', 'oxtilo-fast-cal' ) ), 403 );
 		}
 
 		check_ajax_referer( 'oxtilofastcal_generate_calendar_token', 'nonce' );
@@ -180,7 +224,7 @@ final class Oxtilofastcal_Admin {
 	 */
 	public function ajax_generate_api_token(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Access Denied', 'oxtilofastcal' ) ), 403 );
+			wp_send_json_error( array( 'message' => esc_html__( 'Access Denied', 'oxtilo-fast-cal' ) ), 403 );
 		}
 
 		check_ajax_referer( 'oxtilofastcal_generate_calendar_token', 'nonce' );
@@ -201,25 +245,25 @@ final class Oxtilofastcal_Admin {
 	 */
 	public function ajax_test_ics_feed(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Access Denied', 'oxtilofastcal' ) ), 403 );
+			wp_send_json_error( array( 'message' => esc_html__( 'Access Denied', 'oxtilo-fast-cal' ) ), 403 );
 		}
 
 		check_ajax_referer( 'oxtilofastcal_test_ics_feed', 'nonce' );
 
 		$url = isset( $_POST['url'] ) ? esc_url_raw( wp_unslash( $_POST['url'] ) ) : '';
 		if ( empty( $url ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Empty URL', 'oxtilofastcal' ) ) );
+			wp_send_json_error( array( 'message' => esc_html__( 'Empty URL', 'oxtilo-fast-cal' ) ) );
 		}
 
 		$events = Oxtilofastcal_Availability::fetch_and_parse_ics_events( $url, true );
 		$count  = count( $events );
 
 		if ( 0 === $count ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'No events found or error fetching feed.', 'oxtilofastcal' ) ) );
+			wp_send_json_error( array( 'message' => esc_html__( 'No events found or error fetching feed.', 'oxtilo-fast-cal' ) ) );
 		}
 
 		/* translators: %d: number of events */
-		$msg = sprintf( esc_html__( 'Success! Found %d events.', 'oxtilofastcal' ), $count );
+		$msg = sprintf( esc_html__( 'Success! Found %d events.', 'oxtilo-fast-cal' ), $count );
 		wp_send_json_success( array( 'message' => $msg ) );
 	}
 
@@ -228,7 +272,7 @@ final class Oxtilofastcal_Admin {
 	 */
 	public function ajax_diagnostics(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Access Denied', 'oxtilofastcal' ) ), 403 );
+			wp_send_json_error( array( 'message' => esc_html__( 'Access Denied', 'oxtilo-fast-cal' ) ), 403 );
 		}
 
 		check_ajax_referer( 'oxtilofastcal_diagnostics', 'nonce' );
@@ -243,16 +287,16 @@ final class Oxtilofastcal_Admin {
 		try {
 			$day = new DateTimeImmutable( $date . ' 00:00:00', $tz );
 		} catch ( Exception $e ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Invalid date.', 'oxtilofastcal' ) ) );
+			wp_send_json_error( array( 'message' => esc_html__( 'Invalid date.', 'oxtilo-fast-cal' ) ) );
 		}
 
 		$feeds = get_option( 'oxtilofastcal_ics_feeds', array() );
 		$feeds = is_array( $feeds ) ? $feeds : array();
 
 		$sources = array(
-			'icloud'   => __( 'ICS Calendar 1 URL', 'oxtilofastcal' ),
-			'proton'   => __( 'ICS Calendar 2 URL', 'oxtilofastcal' ),
-			'holidays' => __( 'Holidays ICS URL', 'oxtilofastcal' ),
+			'icloud'   => __( 'ICS Calendar 1 URL', 'oxtilo-fast-cal' ),
+			'proton'   => __( 'ICS Calendar 2 URL', 'oxtilo-fast-cal' ),
+			'holidays' => __( 'Holidays ICS URL', 'oxtilo-fast-cal' ),
 		);
 
 		$day_start = $day->setTime( 0, 0, 0 );
@@ -323,7 +367,7 @@ final class Oxtilofastcal_Admin {
 	 */
 	public function render_settings_page(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'Access Denied', 'oxtilofastcal' ) );
+			wp_die( esc_html__( 'Access Denied', 'oxtilo-fast-cal' ) );
 		}
 		include OXTILOFASTCAL_PLUGIN_DIR . 'admin/views/settings-main.php';
 	}
@@ -333,7 +377,7 @@ final class Oxtilofastcal_Admin {
 	 */
 	public function render_email_templates_page(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'Access Denied', 'oxtilofastcal' ) );
+			wp_die( esc_html__( 'Access Denied', 'oxtilo-fast-cal' ) );
 		}
 		include OXTILOFASTCAL_PLUGIN_DIR . 'admin/views/settings-email.php';
 	}
@@ -343,7 +387,7 @@ final class Oxtilofastcal_Admin {
 	 */
 	public function render_security_page(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'Access Denied', 'oxtilofastcal' ) );
+			wp_die( esc_html__( 'Access Denied', 'oxtilo-fast-cal' ) );
 		}
 		include OXTILOFASTCAL_PLUGIN_DIR . 'admin/views/settings-security.php';
 	}
@@ -353,7 +397,7 @@ final class Oxtilofastcal_Admin {
 	 */
 	public function render_diagnostics_page(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'Access Denied', 'oxtilofastcal' ) );
+			wp_die( esc_html__( 'Access Denied', 'oxtilo-fast-cal' ) );
 		}
 		include OXTILOFASTCAL_PLUGIN_DIR . 'admin/views/settings-diagnostics.php';
 	}
@@ -363,7 +407,7 @@ final class Oxtilofastcal_Admin {
 	 */
 	public function render_bookings_page(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'Access Denied', 'oxtilofastcal' ) );
+			wp_die( esc_html__( 'Access Denied', 'oxtilo-fast-cal' ) );
 		}
 		include OXTILOFASTCAL_PLUGIN_DIR . 'admin/views/bookings-page.php';
 	}
@@ -373,14 +417,14 @@ final class Oxtilofastcal_Admin {
 	 */
 	public function handle_save_booking(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'Access Denied', 'oxtilofastcal' ) );
+			wp_die( esc_html__( 'Access Denied', 'oxtilo-fast-cal' ) );
 		}
 
 		check_admin_referer( 'oxtilofastcal_edit_booking', 'oxtilofastcal_nonce' );
 
 		$booking_id = isset( $_POST['booking_id'] ) ? absint( $_POST['booking_id'] ) : 0;
 		if ( $booking_id <= 0 ) {
-			wp_die( esc_html__( 'Invalid ID', 'oxtilofastcal' ) );
+			wp_die( esc_html__( 'Invalid ID', 'oxtilo-fast-cal' ) );
 		}
 
 		// Validate and parse date/time values.
@@ -389,11 +433,11 @@ final class Oxtilofastcal_Admin {
 			$start_dt = new DateTimeImmutable( sanitize_text_field( wp_unslash( $_POST['start_time'] ?? '' ) ), $tz );
 			$end_dt   = new DateTimeImmutable( sanitize_text_field( wp_unslash( $_POST['end_time'] ?? '' ) ), $tz );
 		} catch ( Exception $e ) {
-			wp_die( esc_html__( 'Invalid date/time format.', 'oxtilofastcal' ) );
+			wp_die( esc_html__( 'Invalid date/time format.', 'oxtilo-fast-cal' ) );
 		}
 
 		if ( $end_dt <= $start_dt ) {
-			wp_die( esc_html__( 'End time must be after start time.', 'oxtilofastcal' ) );
+			wp_die( esc_html__( 'End time must be after start time.', 'oxtilo-fast-cal' ) );
 		}
 
 		$data = array(
@@ -419,7 +463,7 @@ final class Oxtilofastcal_Admin {
 	 */
 	public function handle_delete_booking(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'Access Denied', 'oxtilofastcal' ) );
+			wp_die( esc_html__( 'Access Denied', 'oxtilo-fast-cal' ) );
 		}
 
 		check_admin_referer( 'oxtilofastcal_delete_booking' );
@@ -449,7 +493,7 @@ final class Oxtilofastcal_Admin {
 	 */
 	public function handle_create_booking(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'Access Denied', 'oxtilofastcal' ) );
+			wp_die( esc_html__( 'Access Denied', 'oxtilo-fast-cal' ) );
 		}
 
 		check_admin_referer( 'oxtilofastcal_create_booking', 'oxtilofastcal_nonce' );

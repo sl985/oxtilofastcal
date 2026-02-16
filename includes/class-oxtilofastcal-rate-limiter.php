@@ -94,7 +94,7 @@ final class Oxtilofastcal_Rate_Limiter {
 	 */
 	public function send_ajax_error(): void {
 		wp_send_json_error(
-			array( 'message' => __( 'Too many requests. Please try again later.', 'oxtilofastcal' ) ),
+			array( 'message' => __( 'Too many requests. Please try again later.', 'oxtilo-fast-cal' ) ),
 			429
 		);
 	}
@@ -107,7 +107,7 @@ final class Oxtilofastcal_Rate_Limiter {
 	public function get_rest_error(): WP_Error {
 		return new WP_Error(
 			'rate_limit_exceeded',
-			__( 'Too many requests. Please try again later.', 'oxtilofastcal' ),
+			__( 'Too many requests. Please try again later.', 'oxtilo-fast-cal' ),
 			array( 'status' => 429 )
 		);
 	}
@@ -119,8 +119,8 @@ final class Oxtilofastcal_Rate_Limiter {
 	 */
 	public function send_die_error(): void {
 		wp_die(
-			esc_html__( 'Too many requests. Please try again later.', 'oxtilofastcal' ),
-			esc_html__( 'Rate Limit Exceeded', 'oxtilofastcal' ),
+			esc_html__( 'Too many requests. Please try again later.', 'oxtilo-fast-cal' ),
+			esc_html__( 'Rate Limit Exceeded', 'oxtilo-fast-cal' ),
 			array( 'response' => 429 )
 		);
 	}
@@ -268,7 +268,7 @@ final class Oxtilofastcal_Rate_Limiter {
 				if ( ! is_plugin_active( 'cloudflare/cloudflare.php' ) && ! is_plugin_active( 'cloudflare-flexible-ssl/cloudflare-flexible-ssl.php' ) ) {
 					$info['warning'] = sprintf(
 						/* translators: %s: plugin URL */
-						__( 'Cloudflare detected. For accurate IP detection, consider installing the <a href="%s" target="_blank">Cloudflare plugin</a>.', 'oxtilofastcal' ),
+						__( 'Cloudflare detected. For accurate IP detection, consider installing the <a href="%s" target="_blank">Cloudflare plugin</a>.', 'oxtilo-fast-cal' ),
 						$info['plugin_url']
 					);
 				}
@@ -280,22 +280,22 @@ final class Oxtilofastcal_Rate_Limiter {
 				if ( ! is_plugin_active( 'sucuri-scanner/sucuri.php' ) ) {
 					$info['warning'] = sprintf(
 						/* translators: %s: plugin URL */
-						__( 'Sucuri detected. For accurate IP detection, consider installing the <a href="%s" target="_blank">Sucuri Security plugin</a>.', 'oxtilofastcal' ),
+						__( 'Sucuri detected. For accurate IP detection, consider installing the <a href="%s" target="_blank">Sucuri Security plugin</a>.', 'oxtilo-fast-cal' ),
 						$info['plugin_url']
 					);
 				}
 				break;
 
 			case 'CloudFront':
-				$info['warning'] = __( 'AWS CloudFront detected. IP detection should work automatically with HTTP_CLOUDFRONT_VIEWER_ADDRESS header.', 'oxtilofastcal' );
+				$info['warning'] = __( 'AWS CloudFront detected. IP detection should work automatically with HTTP_CLOUDFRONT_VIEWER_ADDRESS header.', 'oxtilo-fast-cal' );
 				break;
 
 			case 'Fastly':
-				$info['warning'] = __( 'Fastly detected. IP detection should work automatically with HTTP_FASTLY_CLIENT_IP header.', 'oxtilofastcal' );
+				$info['warning'] = __( 'Fastly detected. IP detection should work automatically with HTTP_FASTLY_CLIENT_IP header.', 'oxtilo-fast-cal' );
 				break;
 
 			case 'Generic Proxy/CDN':
-				$info['warning'] = __( 'A proxy or CDN is detected (X-Forwarded-For header present). If rate limiting is not working correctly, please configure the IP source manually below.', 'oxtilofastcal' );
+				$info['warning'] = __( 'A proxy or CDN is detected (X-Forwarded-For header present). If rate limiting is not working correctly, please configure the IP source manually below.', 'oxtilo-fast-cal' );
 				break;
 		}
 

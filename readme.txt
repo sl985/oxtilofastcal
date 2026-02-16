@@ -3,8 +3,8 @@ Contributors: slawomirklimek
 Donate link: https://oxtilo.pl/
 Tags: booking, calendar, appointment, schedule, reservation
 Requires at least: 5.8
-Tested up to: 6.4
-Stable tag: 0.9.5
+Tested up to: 6.9
+Stable tag: 0.9.6
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -51,6 +51,13 @@ Yes, it has built-in Polish translations.
 1. (No screenshots available yet)
 
 == Changelog ==
+
+= 0.9.6 =
+* **Security**: Improved nonce verification and permission checks.
+* **Refactor**: Replaced inline scripts and styles with `wp_enqueue_script` and `wp_enqueue_style`.
+* **Fix**: Corrected text domain to `oxtilo-fast-cal` matches plugin slug.
+* **Compatibility**: Updated Block API version to 3 for WordPress 7.0 readiness.
+* **Compatibility**: Tested up to WordPress 6.9.
 
 = 0.9.5 =
 * **Refactor**: Codebase improvements for WordPress.org plugin review standards.
@@ -135,6 +142,9 @@ Yes, it has built-in Polish translations.
 * Initial release
 
 == Upgrade Notice ==
+
+= 0.9.6 =
+Security and compatibility updates. Recommended update.
 
 = 0.9.5 =
 Codebase refactoring and security improvements. Update recommended.

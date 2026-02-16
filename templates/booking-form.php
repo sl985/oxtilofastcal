@@ -31,7 +31,7 @@ $day_after_dt = $today_dt->add( new DateInterval( 'P2D' ) );
 
 	<?php if ( '1' === $success ) : ?>
 		<div class="oxtilofastcal-notice oxtilofastcal-notice--success">
-			<?php echo esc_html__( 'Your booking has been confirmed.', 'oxtilofastcal' ); ?>
+			<?php echo esc_html__( 'Your booking has been confirmed.', 'oxtilo-fast-cal' ); ?>
 		</div>
 	<?php endif; ?>
 
@@ -40,13 +40,13 @@ $day_after_dt = $today_dt->add( new DateInterval( 'P2D' ) );
 			<?php
 			switch ( $error ) {
 				case 'unavailable':
-					echo esc_html__( 'That time slot is no longer available. Please choose another.', 'oxtilofastcal' );
+					echo esc_html__( 'That time slot is no longer available. Please choose another.', 'oxtilo-fast-cal' );
 					break;
 				case 'invalid_details':
-					echo esc_html__( 'Please enter a valid name and email address.', 'oxtilofastcal' );
+					echo esc_html__( 'Please enter a valid name and email address.', 'oxtilo-fast-cal' );
 					break;
 				default:
-					echo esc_html__( 'We could not complete your booking. Please try again.', 'oxtilofastcal' );
+					echo esc_html__( 'We could not complete your booking. Please try again.', 'oxtilo-fast-cal' );
 					break;
 			}
 			?>
@@ -67,30 +67,31 @@ $day_after_dt = $today_dt->add( new DateInterval( 'P2D' ) );
 			</div>
 			<input type="hidden" name="oxtilofastcal_valid" id="oxtilofastcal_valid" value="" />
 
-			<script>
-			(function() {
-				var start_time = new Date().getTime();
-				var form = document.querySelector('.oxtilofastcal-form__form');
-				if (form) {
-					form.addEventListener('submit', function() {
-						var now = new Date().getTime();
-						var duration = now - start_time;
-						var validField = document.getElementById('oxtilofastcal_valid');
-						if (validField) {
-							validField.value = 'human_verified_' + duration;
-						}
-					});
-				}
-			})();
-			</script>
+			<?php
+			$antibot_js = '(function() {'
+				. 'var start_time = new Date().getTime();'
+				. 'var form = document.querySelector(".oxtilofastcal-form__form");'
+				. 'if (form) {'
+				. 'form.addEventListener("submit", function() {'
+				. 'var now = new Date().getTime();'
+				. 'var duration = now - start_time;'
+				. 'var validField = document.getElementById("oxtilofastcal_valid");'
+				. 'if (validField) {'
+				. 'validField.value = "human_verified_" + duration;'
+				. '}'
+				. '});'
+				. '}'
+				. '})();';
+			wp_add_inline_script( 'oxtilofastcal-frontend', $antibot_js );
+			?>
 		<?php else : ?>
 			<?php wp_nonce_field( 'oxtilofastcal_submit_booking', 'oxtilofastcal_booking_nonce' ); ?>
 		<?php endif; ?>
 
 		<div class="oxtilofastcal-step">
-			<label for="oxtilofastcal_service"><?php echo esc_html__( 'Select a service', 'oxtilofastcal' ); ?></label>
+			<label for="oxtilofastcal_service"><?php echo esc_html__( 'Select a service', 'oxtilo-fast-cal' ); ?></label>
 			<select id="oxtilofastcal_service" name="service_id" required>
-				<option value=""><?php echo esc_html__( 'Choose…', 'oxtilofastcal' ); ?></option>
+				<option value=""><?php echo esc_html__( 'Choose…', 'oxtilo-fast-cal' ); ?></option>
 				<?php foreach ( $services as $idx => $service ) : ?>
 					<?php
 					$name     = isset( $service['name'] ) ? (string) $service['name'] : '';
@@ -104,7 +105,7 @@ $day_after_dt = $today_dt->add( new DateInterval( 'P2D' ) );
 					if ( $duration > 0 ) {
 						$label .= ' (' . sprintf(
 							/* translators: %d: Service duration in minutes */
-							__( '%d min', 'oxtilofastcal' ),
+							__( '%d min', 'oxtilo-fast-cal' ),
 							$duration
 						) . ')';
 					}
@@ -117,47 +118,47 @@ $day_after_dt = $today_dt->add( new DateInterval( 'P2D' ) );
 		</div>
 
 		<div class="oxtilofastcal-step">
-			<label for="oxtilofastcal_date"><?php echo esc_html__( 'Choose a date', 'oxtilofastcal' ); ?></label>
+			<label for="oxtilofastcal_date"><?php echo esc_html__( 'Choose a date', 'oxtilo-fast-cal' ); ?></label>
 			
 			<div class="oxtilofastcal-date-buttons">
-				<button type="button" class="oxtilofastcal-date-btn" data-date="<?php echo esc_attr( $today_dt->format( 'Y-m-d' ) ); ?>"><?php echo esc_html__( 'Today', 'oxtilofastcal' ); ?></button>
-				<button type="button" class="oxtilofastcal-date-btn" data-date="<?php echo esc_attr( $tomorrow_dt->format( 'Y-m-d' ) ); ?>"><?php echo esc_html__( 'Tomorrow', 'oxtilofastcal' ); ?></button>
-				<button type="button" class="oxtilofastcal-date-btn" data-date="<?php echo esc_attr( $day_after_dt->format( 'Y-m-d' ) ); ?>"><?php echo esc_html__( 'Day after', 'oxtilofastcal' ); ?></button>
+				<button type="button" class="oxtilofastcal-date-btn" data-date="<?php echo esc_attr( $today_dt->format( 'Y-m-d' ) ); ?>"><?php echo esc_html__( 'Today', 'oxtilo-fast-cal' ); ?></button>
+				<button type="button" class="oxtilofastcal-date-btn" data-date="<?php echo esc_attr( $tomorrow_dt->format( 'Y-m-d' ) ); ?>"><?php echo esc_html__( 'Tomorrow', 'oxtilo-fast-cal' ); ?></button>
+				<button type="button" class="oxtilofastcal-date-btn" data-date="<?php echo esc_attr( $day_after_dt->format( 'Y-m-d' ) ); ?>"><?php echo esc_html__( 'Day after', 'oxtilo-fast-cal' ); ?></button>
 			</div>
 			
 			<input type="date" id="oxtilofastcal_date" name="date" min="<?php echo esc_attr( $today_dt->format( 'Y-m-d' ) ); ?>" <?php if ( $max_date_val ) : ?>max="<?php echo esc_attr( $max_date_val ); ?>"<?php endif; ?> autocomplete="off" required />
 			<div class="oxtilofastcal-help">
-				<?php echo esc_html__( 'Pick a date to see available times.', 'oxtilofastcal' ); ?>
+				<?php echo esc_html__( 'Pick a date to see available times.', 'oxtilo-fast-cal' ); ?>
 			</div>
 		</div>
 
 		<div class="oxtilofastcal-step">
-			<div class="oxtilofastcal-step__title"><?php echo esc_html__( 'Select a time slot', 'oxtilofastcal' ); ?></div>
+			<div class="oxtilofastcal-step__title"><?php echo esc_html__( 'Select a time slot', 'oxtilo-fast-cal' ); ?></div>
 			<div id="oxtilofastcal_slots" class="oxtilofastcal-slots" aria-live="polite">
 				<div class="oxtilofastcal-slots__placeholder">
-					<?php echo esc_html__( 'Please choose a service and date.', 'oxtilofastcal' ); ?>
+					<?php echo esc_html__( 'Please choose a service and date.', 'oxtilo-fast-cal' ); ?>
 				</div>
 			</div>
 			<input type="hidden" name="slot_start" id="oxtilofastcal_slot_start" value="" />
 		</div>
 
 		<div class="oxtilofastcal-step">
-			<label for="oxtilofastcal_name"><?php echo esc_html__( 'Your name', 'oxtilofastcal' ); ?></label>
+			<label for="oxtilofastcal_name"><?php echo esc_html__( 'Your name', 'oxtilo-fast-cal' ); ?></label>
 			<input type="text" id="oxtilofastcal_name" name="client_name" required />
 		</div>
 
 		<div class="oxtilofastcal-step">
-			<label for="oxtilofastcal_email"><?php echo esc_html__( 'Your email', 'oxtilofastcal' ); ?></label>
+			<label for="oxtilofastcal_email"><?php echo esc_html__( 'Your email', 'oxtilo-fast-cal' ); ?></label>
 			<input type="email" id="oxtilofastcal_email" name="client_email" required />
 		</div>
 		
 		<div class="oxtilofastcal-step">
-			<label for="oxtilofastcal_message"><?php echo esc_html__( 'Add message (optional)', 'oxtilofastcal' ); ?></label>
+			<label for="oxtilofastcal_message"><?php echo esc_html__( 'Add message (optional)', 'oxtilo-fast-cal' ); ?></label>
 			<textarea id="oxtilofastcal_message" name="client_message" rows="3"></textarea>
 		</div>
 
 		<button type="submit" class="oxtilofastcal-submit">
-			<?php echo esc_html__( 'Confirm Booking', 'oxtilofastcal' ); ?>
+			<?php echo esc_html__( 'Confirm Booking', 'oxtilo-fast-cal' ); ?>
 		</button>
 	</form>
 </div>

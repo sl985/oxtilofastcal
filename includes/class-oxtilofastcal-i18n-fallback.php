@@ -406,7 +406,7 @@ final class Oxtilofastcal_I18n_Fallback {
 		}
 
 		// If real MO is loaded, do not override.
-		if ( self::is_domain_translated( 'oxtilofastcal' ) ) {
+		if ( self::is_domain_translated( 'oxtilo-fast-cal' ) ) {
 			return;
 		}
 
@@ -445,7 +445,7 @@ final class Oxtilofastcal_I18n_Fallback {
 	 * @return string
 	 */
 	public static function filter_gettext( string $translated, string $text, string $domain ): string {
-		if ( 'oxtilofastcal' !== $domain ) {
+		if ( 'oxtilo-fast-cal' !== $domain ) {
 			return $translated;
 		}
 

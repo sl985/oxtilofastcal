@@ -125,7 +125,9 @@ final class Oxtilofastcal_Admin {
 	 */
 	public function enqueue_assets( string $hook ): void {
 		// Enqueue on all plugin pages.
-		if ( strpos( $hook, 'page_oxtilofastcal' ) === false && 'toplevel_page_oxtilofastcal' !== $hook ) {
+		// Main page hook: toplevel_page_oxtilo-fast-cal
+		// Sub-page hooks: oxtilo-fast-cal_page_oxtilofastcal-*
+		if ( 'toplevel_page_oxtilo-fast-cal' !== $hook && strpos( $hook, 'oxtilo-fast-cal_page_' ) === false ) {
 			return;
 		}
 

@@ -6,7 +6,6 @@
  * Author: Slawomir Klimek
  * Author URI: https://oxtilo.pl
  * Text Domain: oxtilo-fast-cal
- * Domain Path: /languages
  * Requires PHP: 7.4
  * Requires at least: 5.8
  * License: GPL-2.0+

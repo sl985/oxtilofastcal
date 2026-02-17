@@ -87,7 +87,7 @@ final class Oxtilofastcal_Plugin {
 		// Shortcode.
 		Oxtilofastcal_Shortcode::instance();
 
-		// Note: Gutenberg blocks are registered separately in oxtilofastcal.php
+		// Note: Gutenberg blocks are registered separately in oxtilo-fast-cal.php
 		// to ensure proper timing during the 'init' hook.
 
 		// AJAX handlers.

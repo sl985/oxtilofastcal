@@ -86,6 +86,9 @@ GPL v2 or later
 
 ## Changelog
 
+### 0.9.8
+- **Fix**: Introduced fix to WordPress SVN repository.
+
 ### 0.9.7
 - **Fix**: Renamed main plugin file to `oxtilo-fast-cal.php` to follow WordPress naming conventions.
 - **Fix**: Removed unnecessary `Domain Path` header (translations handled by WordPress.org).

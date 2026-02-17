@@ -4,7 +4,7 @@ Donate link: https://oxtilo.pl/
 Tags: booking, calendar, appointment, schedule, reservation
 Requires at least: 5.8
 Tested up to: 6.9
-Stable tag: 0.9.7
+Stable tag: 0.9.8
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -51,6 +51,9 @@ Yes, it has built-in Polish translations.
 1. (No screenshots available yet)
 
 == Changelog ==
+
+= 0.9.8 =
+* **Fix**: Introduced fix to WordPress SVN repository.
 
 = 0.9.7 =
 * **Fix**: Renamed main plugin file to `oxtilo-fast-cal.php` to follow WordPress naming conventions.
@@ -146,6 +149,9 @@ Yes, it has built-in Polish translations.
 * Initial release
 
 == Upgrade Notice ==
+
+= 0.9.8 =
+SVN repository fix. Recommended update.
 
 = 0.9.7 =
 Plugin review fixes: renamed main file and removed unnecessary Domain Path header.

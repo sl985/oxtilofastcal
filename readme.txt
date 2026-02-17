@@ -4,7 +4,7 @@ Donate link: https://oxtilo.pl/
 Tags: booking, calendar, appointment, schedule, reservation
 Requires at least: 5.8
 Tested up to: 6.9
-Stable tag: 0.9.6
+Stable tag: 0.9.7
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -32,7 +32,7 @@ Oxtilo Fast Cal is a secure and flexible booking management system for WordPress
 
 == Installation ==
 
-1. Upload the `oxtilofastcal` folder to `/wp-content/plugins/`
+1. Upload the `oxtilo-fast-cal` folder to `/wp-content/plugins/`
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Go to **Oxtilo Fast Cal** in the admin menu to configure settings
 
@@ -51,6 +51,10 @@ Yes, it has built-in Polish translations.
 1. (No screenshots available yet)
 
 == Changelog ==
+
+= 0.9.7 =
+* **Fix**: Renamed main plugin file to `oxtilo-fast-cal.php` to follow WordPress naming conventions.
+* **Fix**: Removed unnecessary `Domain Path` header (translations handled by WordPress.org).
 
 = 0.9.6 =
 * **Security**: Improved nonce verification and permission checks.
@@ -142,6 +146,9 @@ Yes, it has built-in Polish translations.
 * Initial release
 
 == Upgrade Notice ==
+
+= 0.9.7 =
+Plugin review fixes: renamed main file and removed unnecessary Domain Path header.
 
 = 0.9.6 =
 Security and compatibility updates. Recommended update.

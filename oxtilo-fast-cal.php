@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Oxtilo Fast Cal
  * Description: A secure and flexible booking management system for WordPress. Features robust availability handling, ICS calendar synchronization, email notifications, and a full REST API. Includes built-in Polish translations.
- * Version: 0.9.6
+ * Version: 0.9.7
  * Author: Slawomir Klimek
  * Author URI: https://oxtilo.pl
  * Text Domain: oxtilo-fast-cal
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants.
-define( 'OXTILOFASTCAL_VERSION', '0.9.6' );
+define( 'OXTILOFASTCAL_VERSION', '0.9.7' );
 define( 'OXTILOFASTCAL_PLUGIN_FILE', __FILE__ );
 define( 'OXTILOFASTCAL_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'OXTILOFASTCAL_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

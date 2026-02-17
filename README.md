@@ -19,9 +19,9 @@ A secure and flexible booking management system for WordPress. Features robust a
 
 ## Installation
 
-1. Upload the `oxtilofastcal` folder to `/wp-content/plugins/`
+1. Upload the `oxtilo-fast-cal` folder to `/wp-content/plugins/`
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Go to **Oxtilofastcal** in the admin menu to configure settings
+3. Go to **Oxtilo Fast Cal** in the admin menu to configure settings
 
 ## Usage
 
@@ -85,6 +85,10 @@ add_filter( 'oxtilofastcal_delete_data_on_uninstall', '__return_false' );
 GPL v2 or later
 
 ## Changelog
+
+### 0.9.7
+- **Fix**: Renamed main plugin file to `oxtilo-fast-cal.php` to follow WordPress naming conventions.
+- **Fix**: Removed unnecessary `Domain Path` header (translations handled by WordPress.org).
 
 ### 0.9.6
 - **Security**: Improved nonce verification and permission checks.
